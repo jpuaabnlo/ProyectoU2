@@ -1,20 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package evaluacion;
 
 /**
- *
  * @author juani
  */
 public class Evaluacion {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Empleado p=new Empleado("Alex",2015);
+        System.out.println(p.getNombre());
+        System.out.println(p.getSueldoBase());
+        System.out.println(p.getAnioIngreso());
+        p.incrementarSueldo(30);
     }
     
 }
