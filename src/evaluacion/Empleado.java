@@ -37,8 +37,8 @@ public class Empleado {
     }
 
     public void setAnioIngreso(int anioIngreso) {
-        if(anioIngreso<2001 || anioIngreso>2024){
-            System.err.println("El año de ingreso sólo puede ser desde 2001 hasta 2024");
+        if(anioIngreso<2005 || anioIngreso>2024){
+            System.err.println("El año de ingreso sólo puede ser desde 2005 hasta 2024");
             return;
         }
         this.anioIngreso = anioIngreso;
