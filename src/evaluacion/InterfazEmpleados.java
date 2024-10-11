@@ -4,17 +4,22 @@
  */
 package evaluacion;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author quiro
  */
 public class InterfazEmpleados extends javax.swing.JFrame {
-
+    private ArrayList<Empleado> empleados;
+    private DefaultTableModel modeloTabla;
     /**
      * Creates new form InterfazEmpleados
      */
     public InterfazEmpleados() {
         initComponents();
+        modeloTabla=(DefaultTableModel) tblCalificaciones.getModel();
     }
 
     /**
@@ -29,13 +34,13 @@ public class InterfazEmpleados extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCalificaciones = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnDarDeAlta = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        txtNombre = new javax.swing.JTextPane();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtAnioIngreso = new javax.swing.JTextPane();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnBorrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblAnioIngreso = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -66,25 +71,35 @@ public class InterfazEmpleados extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblCalificaciones);
         tblCalificaciones.getAccessibleContext().setAccessibleName("");
 
-        jLabel1.setText("DAR DE ALTA EMPLEADOS");
+        jLabel1.setText("EMPLEADOS");
 
-        jButton1.setLabel("DAR DE ALTA");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDarDeAlta.setLabel("DAR DE ALTA");
+        btnDarDeAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDarDeAltaActionPerformed(evt);
             }
         });
 
-        jTextPane1.setToolTipText("");
-        jScrollPane2.setViewportView(jTextPane1);
-        jTextPane1.getAccessibleContext().setAccessibleName("txtPnNombre");
+        txtNombre.setToolTipText("");
+        jScrollPane2.setViewportView(txtNombre);
+        txtNombre.getAccessibleContext().setAccessibleName("txtPnNombre");
 
         jScrollPane4.setViewportView(txtAnioIngreso);
         txtAnioIngreso.getAccessibleContext().setAccessibleName("txtPnAnioIngreso");
 
-        jButton2.setText("EDITAR");
+        btnEditar.setText("EDITAR");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("BORRAR");
+        btnBorrar.setText("BORRAR");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("NOMBRE: ");
 
@@ -101,9 +116,9 @@ public class InterfazEmpleados extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(537, Short.MAX_VALUE))
+                .addContainerGap(614, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -111,10 +126,10 @@ public class InterfazEmpleados extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(jScrollPane2)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDarDeAlta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                        .addComponent(btnBorrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lblIncrementarSueldo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -127,7 +142,7 @@ public class InterfazEmpleados extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE))
+                        .addGap(18, 167, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -141,29 +156,51 @@ public class InterfazEmpleados extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton1)
+                        .addComponent(btnDarDeAlta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(btnBorrar)
                         .addGap(46, 46, 46))))
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("txtTitulo");
-        jButton1.getAccessibleContext().setAccessibleName("btnDarDeAlta");
-        jButton2.getAccessibleContext().setAccessibleName("btnEditar");
-        jButton3.getAccessibleContext().setAccessibleName("btnBorrar");
+        btnDarDeAlta.getAccessibleContext().setAccessibleName("btnDarDeAlta");
+        btnEditar.getAccessibleContext().setAccessibleName("btnEditar");
+        btnBorrar.getAccessibleContext().setAccessibleName("btnBorrar");
         jLabel2.getAccessibleContext().setAccessibleName("txtNombre");
         lblAnioIngreso.getAccessibleContext().setAccessibleName("txtAnioIngreso");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDarDeAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarDeAltaActionPerformed
         // TODO add your handling code here:
-        Empleado nuevo = new Empleado(txtNombre.
-        ); 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Empleado nuevo = new Empleado(txtNombre.getText(),
+                Integer.parseInt(txtAnioIngreso.getText())
+        );
+        empleados.add(nuevo);
+        Object[] fila = {nuevo.getNombre(), nuevo.getSueldoBase(), nuevo.getAnioIngreso()};
+        modeloTabla.addRow(fila);
+        
+    }//GEN-LAST:event_btnDarDeAltaActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        if(txtNombre.getText()!=null 
+                && Integer.parseInt(txtAnioIngreso.getText())>0 
+                && Integer.parseInt(txtIncrementarSueldo.getText())>0)
+        {
+            modeloTabla.setValueAt(evt, ERROR, NORMAL);
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        // TODO add your handling code here:
+        if(modeloTabla.getRowCount()>0){
+            modeloTabla.removeRow(ERROR);
+        }
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,20 +238,20 @@ public class InterfazEmpleados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnDarDeAlta;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lblAnioIngreso;
     private javax.swing.JLabel lblIncrementarSueldo;
     private javax.swing.JTable tblCalificaciones;
     private javax.swing.JTextPane txtAnioIngreso;
     private javax.swing.JTextPane txtIncrementarSueldo;
+    private javax.swing.JTextPane txtNombre;
     // End of variables declaration//GEN-END:variables
 }
