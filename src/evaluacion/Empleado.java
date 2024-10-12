@@ -17,7 +17,11 @@ public class Empleado {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if (nombre!=null && nombre.trim().length()>=1 && nombre.trim().length()<=60) {
+            this.nombre = nombre.trim();
+        } else {
+            System.out.println("Error: El nombre debe tener entre 1 y 60 caracteres y no puede estar vacío.");
+        }
     }
 
     public double getSueldoBase() {
