@@ -6,6 +6,7 @@ package evaluacion;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -180,25 +181,44 @@ public class InterfazEmpleados extends javax.swing.JFrame {
                 Integer.parseInt(txtAnioIngreso.getText())
         );
         empleados.add(nuevo);
-        Object[] fila = {nuevo.getNombre(), nuevo.getSueldoBase(), nuevo.getAnioIngreso()};
+        Object[] fila = {nuevo.getNombre(), nuevo.sueldoTotal(), nuevo.getAnioIngreso()};
         modeloTabla.addRow(fila);
         
     }                                            
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-        if(txtNombre.getText()!=null 
-                && Integer.parseInt(txtAnioIngreso.getText())>0 
-                && Integer.parseInt(txtIncrementarSueldo.getText())>0)
+        int selectedRow = tblCalificaciones.getSelectedRow();
+        String nombre=txtNombre.getText();
+        int anioIngreso=Integer.parseInt(txtAnioIngreso.getText());
+        int sueldo=Integer.parseInt(txtIncrementarSueldo.getText());
+        if(nombre!=null 
+                && anioIngreso>=2004 && anioIngreso<2025 
+                && sueldo>=1000 && sueldo<=50000)
         {
-            modeloTabla.setValueAt(evt, ERROR, NORMAL);
+            Empleado empleado = new Empleado(nombre, anioIngreso);
+            empleado.setSueldoBase(sueldo);
+            modeloTabla.setValueAt(nombre, selectedRow, 0);
+            modeloTabla.setValueAt(empleado.sueldoTotal(), selectedRow, 1);
+            modeloTabla.setValueAt(anioIngreso, selectedRow, 2);
+            JOptionPane.showMessageDialog(this, "Empleado actualizado correctamente.");
+        }
+        else{
+            
+            JOptionPane.showMessageDialog(this, "Verifica que los datos sean correctos.");
         }
     }                                         
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-        if(modeloTabla.getRowCount()>0){
-            modeloTabla.removeRow(ERROR);
+        int selectedRow = tblCalificaciones.getSelectedRow();
+        if(selectedRow>=0){
+            modeloTabla.removeRow(selectedRow);
+            JOptionPane.showMessageDialog(this, "Empleado eliminado correctamente.");
+            System.out.println("");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Seleccione un empleado.");
         }
     }                                         
 
